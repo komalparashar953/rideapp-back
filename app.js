@@ -36,17 +36,17 @@ app.use('/rides', rideRoutes);
 const __dirname1 = path.resolve();
 
 if (process.env.NODE_ENV === 'production') {
-    // Serve the static files from the React app
-    app.use(express.static(path.join(__dirname1, '../frontend/build')));
+    const buildPath = path.join(__dirname1, '../frontend/build');
+    const indexPath = path.join(__dirname1, '../frontend/build', 'index.html');
 
-    // Handles any requests that don't match the ones above
+    // Add these logs
+    console.log('Serving static files from:', buildPath);
+    console.log('Serving index.html from:', indexPath);
+
+    app.use(express.static(buildPath));
+
     app.get('*', (req, res) => {
-        res.sendFile(path.resolve(__dirname1, '../frontend/build', 'index.html'));
-    });
-} else {
-    // A simple root route for development/testing
-    app.get('/', (req, res) => {
-        res.send('API is running in development mode...');
+        res.sendFile(indexPath);
     });
 }
 
