@@ -9,7 +9,7 @@ connectToDB();
 const app = express();
 
 // Configure CORS for your future frontend URL
-const frontendURL = process.env.FRONTEND_URL || "http://localhost:3000";
+const frontendURL = process.env.FRONTEND_URL;
 app.use(cors({
     origin: frontendURL,
     credentials: true
@@ -30,7 +30,7 @@ app.get('/', (req, res) => {
     res.send('API is running...');
 });
 
-const PORT = process.env.PORT || 4000;
+const PORT = process.env.PORT;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
